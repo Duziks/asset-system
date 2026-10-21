@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>资产经营公司管理系统</title>
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
+</head>
+<body data-theme="blue" data-layout="sidebar">
+
+<!-- 登录页 -->
+<div id="login-page" class="login-wrap hidden">
+  <div class="login-box">
+    <div class="login-brand">
+      <div class="logo">资</div>
+      <h1>资产经营公司管理系统</h1>
+      <p>威海哈威资产经营有限责任公司</p>
+    </div>
+    <div class="login-form">
+      <div class="field"><label>用户名</label><input id="login-username" placeholder="请输入用户名" autocomplete="off"></div>
+      <div class="field"><label>密码</label><input id="login-password" type="password" placeholder="请输入密码"></div>
+      <div id="login-error" class="login-error hidden"></div>
+      <button class="btn primary block" id="btn-login">登 录</button>
+      <div class="login-tips">
+        <b>演示账号</b>(初始密码登录后请修改)：<br>
+        管理员 admin/admin123 · 董事长 chairman/chair123<br>
+        秘书 secretary/secret123 · 主管 supervisor/super123<br>
+        员工 employee/emp123 · 企业用户 company/comp123
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 修改初始密码弹窗 -->
+<div id="pwd-modal" class="modal-mask hidden">
+  <div class="modal" style="width:420px">
+    <div class="modal-head"><span>首次登录，请修改密码</span></div>
+    <div class="modal-body">
+      <div class="field"><label>原密码</label><input id="pwd-old" type="password"></div>
+      <div class="field"><label>新密码(至少6位)</label><input id="pwd-new" type="password"></div>
+      <div class="field"><label>确认新密码</label><input id="pwd-new2" type="password"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn ghost" onclick="document.getElementById('pwd-modal').classList.add('hidden')">稍后再说</button>
+      <button class="btn primary" id="btn-change-pwd">确认修改</button>
+    </div>
+  </div>
+</div>
+
+<!-- 主界面 -->
+<div id="app" class="app hidden">
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="logo sm">资</div>
+      <span class="sys-name">资产经营公司管理系统</span>
+    </div>
+    <nav id="topnav" class="topnav hidden"></nav>
+    <div class="topbar-right">
+      <span id="msg-badge" class="icon-btn" title="消息提醒">🔔<i id="msg-count" class="badge hidden"></i></span>
+      <span class="icon-btn" id="btn-layout" title="切换菜单布局(横/竖)">▤</span>
+      <span class="icon-btn" id="btn-theme" title="切换主题色">🎨</span>
+      <div class="user-chip" id="user-chip">
+        <span id="user-name">--</span><small id="user-role"></small>
+        <div class="user-menu hidden">
+          <a id="menu-profile">修改密码</a>
+          <a id="menu-logout">退出登录</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="app-body">
+    <aside id="sidebar" class="sidebar"></aside>
+    <main id="content" class="content"></main>
+  </div>
+</div>
+
+<!-- 通用弹窗 -->
+<div id="modal-mask" class="modal-mask hidden">
+  <div class="modal" id="modal-box">
+    <div class="modal-head"><span id="modal-title"></span><a class="modal-close" onclick="UI.closeModal()">✕</a></div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-foot" id="modal-foot"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="/assets/lib/echarts.min.js"></script>
+<script src="/assets/js/app.js"></script>
+</body>
+</html>
