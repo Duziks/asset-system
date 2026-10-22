@@ -1002,9 +1002,27 @@ $("#btn-change-pwd").onclick = async () => {
 
 /* ---------- 启动 ---------- */
 $("#btn-login").onclick = doLogin;
-$("#login-password").onkeydown = (e) => e.key === "Enter" && doLogin();
+$("#login-password").onkeydown = (e) => { if (e.key === "Enter") doLogin(); };
+// 密码框确保不会被任何全局键盘监听拦截
+$("#login-password").addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === "Tab") return;
+}, false);
 (async function init() {
-  if (!S.token) { $("#login-page").classList.remove("hidden"); return; }
+  if (!S.token) {
+    $("#login-page").classList.remove("hidden");
+    // 页面渲染完后自动聚焦密码框，确保可输入
+    setTimeout(() => {
+      const p = document.getElementById("login-password");
+      if (p) p.focus();
+    }, 100);
+    return;
+  }
   try { await enterApp(); }
-  catch (e) { $("#login-page").classList.remove("hidden"); }
+  catch (e) {
+    $("#login-page").classList.remove("hidden");
+    setTimeout(() => {
+      const p = document.getElementById("login-password");
+      if (p) p.focus();
+    }, 100);
+  }
 })();
